@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Artista</title>
+</head>
+<body>
+    <h1>Editar Artista</h1>
+    
+    <form action="/editar_artista/{{ artista[0] }}" method="POST">
+        <p>
+            <label>Nombre Artístico:</label>
+            <input type="text" name="nombre_artistico" value="{{ artista[1] }}">
+        </p>
+        <p>
+            <label>Nombre Real:</label>
+            <input type="text" name="nombre_real" value="{{ artista[2] }}">
+        </p>
+        <p>
+            <label>País:</label>
+            <input type="text" name="pais" value="{{ artista[3] }}">
+        </p>
+        <p>
+            <label>Fecha de Nacimiento:</label>
+            <input type="text" name="fecha_nacimiento" value="{{ artista[4] }}">
+        </p>
+        <p>
+            <label>Género Musical:</label>
+            <input type="text" name="genero_musical" value="{{ artista[5] }}">
+        </p>
+        <p>
+            <label>Biografía:</label>
+            <textarea name="biografia">{{ artista[6] }}</textarea>
+        </p>
+        <button type="submit">Actualizar Cambios</button>
+    </form>
+    
+    <br>
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

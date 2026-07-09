@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Music</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#0d1117;
+            color:white;
+        }
+
+        header{
+            background:linear-gradient(90deg,#6a11cb,#2575fc);
+            padding:40px;
+            text-align:center;
+            box-shadow:0 5px 15px rgba(0,0,0,.4);
+        }
+
+        header h1{
+            font-size:45px;
+            letter-spacing:2px;
+        }
+
+        header p{
+            margin-top:10px;
+            color:#ddd;
+            font-size:18px;
+        }
+
+        .contenedor{
+            width:90%;
+            margin:40px auto;
+            display:grid;
+            grid-template-columns:35% 60%;
+            gap:40px;
+        }
+
+        .card{
+
+            background:#161b22;
+            border-radius:15px;
+            padding:25px;
+            box-shadow:0 0 20px rgba(0,0,0,.4);
+
+        }
+
+        h2{
+
+            margin-bottom:20px;
+            color:#58a6ff;
+
+        }
+
+        input, textarea{
+
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:none;
+            border-radius:8px;
+            background:#21262d;
+            color:white;
+
+        }
+
+        textarea{
+
+            resize:none;
+            height:90px;
+
+        }
+
+        button{
+
+            width:100%;
+            padding:14px;
+            background:#238636;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+
+        }
+
+        button:hover{
+
+            background:#2ea043;
+
+        }
+
+        table{
+
+            width:100%;
+            border-collapse:collapse;
+
+        }
+
+        table th{
+
+            background:#30363d;
+            padding:12px;
+
+        }
+
+        table td{
+
+            padding:12px;
+            text-align:center;
+            border-bottom:1px solid #30363d;
+
+        }
+
+        tr:hover{
+
+            background:#21262d;
+
+        }
+
+        .editar{
+
+            text-decoration:none;
+            background:#1f6feb;
+            color:white;
+            padding:8px 12px;
+            border-radius:6px;
+
+        }
+
+        .eliminar{
+
+            text-decoration:none;
+            background:#da3633;
+            color:white;
+            padding:8px 12px;
+            border-radius:6px;
+
+        }
+
+        footer{
+
+            margin-top:40px;
+            text-align:center;
+            padding:20px;
+            color:#999;
+
+        }
+
+        @media(max-width:900px){
+
+            .contenedor{
+
+                grid-template-columns:1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>ARTIST MUSIC</h1>
+
+    <p>Administra la información de tu artista favorito</p>
+
+</header>
+
+<div class="contenedor">
+
+    <div class="card">
+
+        <h2>Registrar Artista</h2>
+
+        <form action="/guardar_artista" method="POST">
+
+            <input
+            type="text"
+            name="nombre_artistico"
+            placeholder="Nombre artístico"
+            required>
+
+            <input
+            type="text"
+            name="nombre_real"
+            placeholder="Nombre real"
+            required>
+
+            <input
+            type="text"
+            name="pais"
+            placeholder="País"
+            required>
+
+            <input
+            type="date"
+            name="fecha_nacimiento"
+            required>
+
+            <input
+            type="text"
+            name="genero_musical"
+            placeholder="Género musical"
+            required>
+
+            <textarea
+            name="biografia"
+            placeholder="Biografía"></textarea>
+
+            <button type="submit">
+
+                Guardar Artista
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Artistas Registrados</h2>
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Artístico</th>
+                <th>Real</th>
+                <th>País</th>
+                <th>Nacimiento</th>
+                <th>Género</th>
+                <th>Acciones</th>
+
+            </tr>
+
+            {% for artista in artistas %}
+
+            <tr>
+
+                <td>{{ artista[0] }}</td>
+                <td>{{ artista[1] }}</td>
+                <td>{{ artista[2] }}</td>
+                <td>{{ artista[3] }}</td>
+                <td>{{ artista[4] }}</td>
+                <td>{{ artista[5] }}</td>
+
+                <td>
+
+                    <a class="editar"
+                    href="/editar_artista/{{artista[0]}}">
+
+                        Editar
+
+                    </a>
+
+                    <a class="eliminar"
+                    href="/eliminar_artista/{{artista[0]}}"
+                    onclick="return confirm('¿Desea eliminar este artista?')">
+
+                        Eliminar
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+<footer>
+
+    Plataforma Musical | Proyecto Flask + PostgreSQL
+
+</footer>
+
+</body>
+</html>
